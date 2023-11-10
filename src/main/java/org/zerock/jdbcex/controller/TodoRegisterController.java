@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +24,23 @@ public class TodoRegisterController  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("/todo/register GET .......");
+
+
+        // 글 등록시 로그인 한 상태에서 등록 가능하도록 세션을 가져옴
+        HttpSession session = req.getSession();
+        if(session.isNew()) { //기존에 JSESSIONID가 없는 새로운 사용자
+
+            log.info("JSESSIONID 쿠키가 새로 만들어진 사용자(즉 처음 접속한 사람)이므로 로그인 화면으로 보내버림 ");
+            resp.sendRedirect("/jdbcex/login");
+            return;
+
+
+        }
+
+
+
+
+
         req.getRequestDispatcher("/WEB-INF/todo/register.jsp").forward(req,resp);
     }
 
