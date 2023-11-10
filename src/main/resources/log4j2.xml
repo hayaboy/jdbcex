@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!-- status="WARN"은 구성의 상태를 경고 수준으로 설정하고, 이상이 있을 때 경고 메시지만 표시하도록 구성합니다.-->
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--t : thread -->
+            <!-- 로거 이름(%logger{36})-->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
